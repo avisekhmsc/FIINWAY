@@ -84,7 +84,7 @@
                  style="background: linear-gradient(135deg, #003d1f 0%, #006837 100%);"
                  onclick="window.location.href='{{ route('seller.products.create') }}'">
                 <div class="z-10">
-                    <h3 class="font-bold text-xl text-white mb-1">Become a Seller</h3>
+                    <h3 class="font-bold text-xl text-white mb-1">I want to sell</h3>
                     <p class="text-white/70 text-sm font-medium">Sell to crores of customers on FIINWAY</p>
                 </div>
                 <i class="ri-store-2-line text-6xl text-white/30 z-10"></i>
