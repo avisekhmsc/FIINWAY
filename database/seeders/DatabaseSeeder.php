@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // ─── Truncate everything cleanly ─────────────────────────────────────
-        DB::statement('PRAGMA foreign_keys = OFF');
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
         ProductImage::truncate();
         Product::truncate();
         DB::table('wishlists')->truncate();
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         User::where('role', '!=', 'admin')->delete(); // keep admin if exists
         User::truncate();
         Category::truncate();
-        DB::statement('PRAGMA foreign_keys = ON');
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
         // ─── 1. App Settings ─────────────────────────────────────────────────
         $settings = [
