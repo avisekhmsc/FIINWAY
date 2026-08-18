@@ -87,7 +87,7 @@
                 <a href="{{ route('seller.products.create') }}"
                    class="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded hover:bg-green-800 transition-colors text-white font-bold text-xs">
                     <i class="ri-store-2-line text-base"></i>
-                    Become a Seller
+                    I want to sell
                 </a>
 
                 {{-- Cart --}}

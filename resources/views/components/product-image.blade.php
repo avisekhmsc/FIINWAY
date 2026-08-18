@@ -16,7 +16,15 @@
         $imagePath = $primary ? $primary->image_path : null;
     }
 
-    $url = $imagePath ? asset('storage/' . ltrim($imagePath, '/')) : asset('storage/products/default.webp');
+    $url = null;
+    if ($imagePath) {
+        // If it's already a full URL (CDN), use directly; otherwise resolve from storage
+        $url = (str_starts_with($imagePath, 'http://') || str_starts_with($imagePath, 'https://'))
+            ? $imagePath
+            : asset('storage/' . ltrim($imagePath, '/'));
+    } else {
+        $url = asset('storage/products/default.webp');
+    }
     $altText = $alt ?? ($product ? $product->name : 'Product Image');
 
     $aspectClass = match($aspect) {
