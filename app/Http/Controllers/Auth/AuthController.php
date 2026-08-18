@@ -59,11 +59,17 @@ class AuthController extends Controller
             'otp_expires_at' => now()->addMinutes(10),
         ]);
 
-        // Store in session for OTP verification
-        session(['otp_phone' => $phone, 'otp_is_new' => $isNew]);
+        // Store in session for OTP verification (persistent, not flash)
+        session([
+            'otp_phone'  => $phone,
+            'otp_is_new' => $isNew,
+            'demo_otp'   => $otp,   // persist across refreshes
+        ]);
 
-        // In real app: send SMS. For demo, flash OTP
-        return redirect()->route('otp.verify')->with('demo_otp', $otp)->with('is_new', $isNew);
+        // In real app: send SMS. For demo, log it.
+        \Illuminate\Support\Facades\Log::info("DEMO OTP for $phone: $otp");
+
+        return redirect()->route('otp.verify');
     }
 
     // Show OTP form
@@ -71,7 +77,10 @@ class AuthController extends Controller
     {
         if (Auth::check()) return redirect()->route('home');
         if (!session('otp_phone')) return redirect()->route('mobile');
-        return view('auth.otp');
+        return view('auth.otp', [
+            'phone'    => session('otp_phone'),
+            'demo_otp' => session('demo_otp'),
+        ]);
     }
 
     // Verify OTP
@@ -91,7 +100,8 @@ class AuthController extends Controller
         $user->update(['otp' => null, 'otp_expires_at' => null, 'phone_verified_at' => now()]);
 
         Auth::login($user);
-        session()->forget(['otp_phone', 'otp_is_new']);
+        // Clear OTP session data
+        session()->forget(['otp_phone', 'otp_is_new', 'demo_otp']);
 
         // Check if profile is complete
         if ($user->name === 'User' || !$user->city) {
