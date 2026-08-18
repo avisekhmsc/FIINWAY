@@ -234,10 +234,10 @@
                 <h3 class="text-[15px] font-bold text-[#212121] mb-4">Account Summary</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     @php
-                        $orderCount   = $user->orders()->count();
-                        $wishlistCount = $user->wishlists()->count();
-                        $reviewCount  = $user->reviews()->count();
-                        $returnCount  = $user->returns()->count();
+                        $orderCount   = $stats['orders'];
+                        $wishlistCount = $stats['wishlist'];
+                        $reviewCount  = $stats['reviews'];
+                        $returnCount  = $stats['returns'];
                     @endphp
                     @foreach([
                         ['icon'=>'ri-shopping-bag-3-fill', 'val'=>$orderCount,   'label'=>'Orders',    'color'=>'#006837'],
