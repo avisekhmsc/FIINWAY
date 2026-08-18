@@ -13,6 +13,15 @@ class Product extends Model {
     public function primaryImage() { return $this->hasOne(ProductImage::class)->where('is_primary',true); }
     public function reviews() { return $this->hasMany(Review::class); }
     public function cartItems() { return $this->hasMany(CartItem::class); }
-    public function getPrimaryImageUrlAttribute() { $img = $this->images()->where('is_primary',true)->first() ?? $this->images()->first(); return $img ? asset('storage/'.$img->image_path) : asset('images/placeholder.png'); }
+    public function getPrimaryImageUrlAttribute() {
+        $img = $this->images()->where('is_primary', true)->first() ?? $this->images()->first();
+        if (!$img) return asset('images/placeholder.png');
+        $path = $img->image_path;
+        // If it's already a full CDN/external URL, use it directly
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+        return asset('storage/' . ltrim($path, '/'));
+    }
     public function getDiscountAmountAttribute() { return $this->original_price ? ($this->original_price - $this->selling_price) : 0; }
 }

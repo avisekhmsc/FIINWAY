@@ -13,13 +13,6 @@
     </div>
 </div>
 
-<div class="bg-green-50 border border-green-100 rounded-xl p-4 mb-6 flex gap-3">
-    <i class="ri-information-fill text-green-500 text-xl"></i>
-    <div>
-        <h4 class="font-bold text-blue-900 text-sm mb-1">Demo Mode Active</h4>
-        <p class="text-xs text-blue-800">Refund processing is currently running in DEMO mode. Processing a refund will update the database state and generate a mock transaction ID, but will not initiate a real financial transfer.</p>
-    </div>
-</div>
 
 <div class="fk-card p-0">
     <div class="table-wrap">
@@ -57,7 +50,7 @@
                         @if($refund->status === 'pending')
                             <form action="{{ route('admin.refunds.process', $refund->id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="fk-btn-primary btn-sm" onclick="return confirm('Process this refund? (Demo mode will simulate transfer)')">Process Refund</button>
+                                <button type="submit" class="fk-btn-primary btn-sm" onclick="return confirm('Process this refund via Razorpay? This cannot be undone.')">Process Refund</button>
                             </form>
                         @else
                             <span class="text-xs text-slate-400 font-semibold">Processed</span>
