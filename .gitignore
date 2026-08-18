@@ -1,0 +1,58 @@
+# ─── Laravel ──────────────────────────────────────────────────────────────────
+/.env
+/.env.*
+!/.env.example
+/storage/app/public/*
+!/storage/app/public/.gitkeep
+/storage/framework/cache/*
+!/storage/framework/cache/.gitkeep
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
+/storage/framework/testing/*
+!/storage/framework/testing/.gitkeep
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/pail
+/storage/*.key
+/bootstrap/cache/*.php
+
+# ─── Database ─────────────────────────────────────────────────────────────────
+/database/database.sqlite
+
+# ─── Dependencies ─────────────────────────────────────────────────────────────
+/vendor
+/node_modules
+
+# ─── Build Artifacts ──────────────────────────────────────────────────────────
+/public/build
+/public/hot
+/public/storage
+/public/fonts-manifest.dev.json
+
+# ─── IDE & OS ─────────────────────────────────────────────────────────────────
+/.idea
+/.vscode
+/.cursor
+/.zed
+/.nova
+/.codex
+.DS_Store
+Thumbs.db
+*.log
+
+# ─── PHP / Testing ────────────────────────────────────────────────────────────
+.phpunit.result.cache
+/.phpunit.cache
+_ide_helper.php
+_ide_helper_models.php
+.phpactor.json
+/auth.json
+
+# ─── Misc Project ─────────────────────────────────────────────────────────────
+Homestead.json
+Homestead.yaml
+.npmrc
+/marketplace_audit_report.md
+'png fiinway 360.png'
